@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Airports.Data.DO;
 using Airports.Service.Contracts;
+using Airports.Core.DTO;
 
 namespace Airports.Controllers
 {
@@ -20,7 +20,7 @@ namespace Airports.Controllers
 
         // GET api/airports/BWS
         [HttpGet, Route("api/airports/{iso}")]
-        public ActionResult<Airport> Airports(string iso)
+        public ActionResult<AirportDto> Airports(string iso)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace Airports.Controllers
         {
             try
             {
-                var result = _airportService.UpdateAirportData();
+                var result = _airportService.RefreshData();
                 return Ok(result);
             }
             catch (Exception ex)
@@ -46,5 +46,31 @@ namespace Airports.Controllers
                 return BadRequest(ex);
             }
         }
+
+        [HttpPost, Route("api/airports")]
+        public ActionResult<int> UpdateAirport([FromBody] AirportDto airport)
+        {
+            throw new NotImplementedException();
+
+        }
+        [HttpPut, Route("api/airports")]
+        public ActionResult<int> AddAirport([FromBody] AirportDto airport)
+        {
+            if (airport == null)
+            {
+                return UnprocessableEntity();
+            }
+            try
+            {
+                var result = _airportService.AddAirport(airport);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+
     }
 }

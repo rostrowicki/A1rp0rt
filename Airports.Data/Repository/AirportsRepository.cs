@@ -42,6 +42,27 @@ namespace Airports.Data.Repository
             return 0;
         }
 
+        public async Task<int> AddAirport(AirportDto airport)
+        {
+            int recordsAffected = 0;
+            var newAirport = new Airport()
+            {
+                Iata = airport.Iata,
+                Lon = airport.Lon,
+                Lat = airport.Lat,
+                Iso = airport.Iso,
+                Status = airport.Status,
+                Name = airport.Name,
+                Continent = airport.Continent,
+                Type = airport.Type,
+                Size = airport.Size,
+            };
+            context.Airports.Add(newAirport);
+            recordsAffected = await context.SaveChangesAsync();
+
+            return recordsAffected;
+        }
+
         private IEnumerable<Airport> ToAirportsDO(List<AirportDto> airports)
         {
             var list = new List<Airport>();

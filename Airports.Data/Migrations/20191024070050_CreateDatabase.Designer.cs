@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Airports.Data.Migrations
 {
     [DbContext(typeof(AirportsContext))]
-    [Migration("20191023154124_CreateDatabase")]
+    [Migration("20191024070050_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

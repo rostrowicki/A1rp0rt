@@ -20,13 +20,19 @@ namespace Airports.Service
             airportsRepository = new AirportsRepository();
         }
 
-        public IEnumerable<Airport> GetAirportsByIso(string iso)
+        public IEnumerable<AirportDto> GetAirportsByIso(string iso)
         {
             try
             {
                 Task<IEnumerable<Airport>> airportTask = airportsRepository.GetAirportsByIso(iso);
                 Task.WhenAll(airportTask);
-                return airportTask.Result;
+
+                var airportReturnSet = new List<AirportDto>();
+                foreach (var item in airportTask.Result)
+                {
+                    airportReturnSet.Add(item.ToDto());
+                }
+                return airportReturnSet;
             }
             catch (Exception ex)
             {
@@ -34,7 +40,7 @@ namespace Airports.Service
             }
         }
 
-        public int UpdateAirportData()
+        public int RefreshData()
         {
             // Load json from remote URI
             string remoteUri = "https://raw.githubusercontent.com/jbrooksuk/JSON-Airports/master/airports.json";
@@ -50,6 +56,25 @@ namespace Airports.Service
                 return airportsRepository.UpdateAirportData(items);
             }
             return items.Count;
+        }
+
+        public int UpdateAirport(AirportDto airport)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddAirport(AirportDto airport)
+        {
+            try
+            {
+                var airportTask = airportsRepository.AddAirport(airport);
+                Task.WhenAll(airportTask);
+                return airportTask.Result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

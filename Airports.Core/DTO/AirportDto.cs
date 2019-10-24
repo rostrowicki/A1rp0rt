@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Airports.Core.DTO;
 
 namespace Airports.Core.DTO
 {

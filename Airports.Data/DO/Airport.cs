@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Airports.Core.DTO;
 
 namespace Airports.Data.DO
 {
-    public class Airport: AirportDbTable
+    public class Airport : AirportDbTable
     {
-        [Key, Column("Airport_Id")]        
+        [Key, Column("Airport_Id")]
         public int AirportId { get; set; }
         [Column("IATA")]
         public string Iata { get; set; }
@@ -20,6 +21,22 @@ namespace Airports.Data.DO
         public string Continent { get; set; }
         public string Type { get; set; }
         public string Size { get; set; }
+        public AirportDto ToDto()
+        {
+            return new AirportDto()
+            {
+                AirportId = this.AirportId,
+                Iata = this.Iata,
+                Lon = this.Lon,
+                Lat = this.Lat,
+                Iso = this.Iso,
+                Status = this.Status,
+                Name = this.Name,
+                Continent = this.Continent,
+                Type = this.Type,
+                Size = this.Size,
+            };
+        }
     }
 }
 
