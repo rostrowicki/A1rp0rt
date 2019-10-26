@@ -43,7 +43,11 @@ namespace Airports
             {
                 app.UseHsts();
             }
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200"));
+            // app.UseCors(builder => builder.WithOrigins("http://localhost:4200"));
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
             app.UseHttpsRedirection();
             app.UseMvc();
         }

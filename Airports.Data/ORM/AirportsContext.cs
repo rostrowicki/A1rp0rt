@@ -8,8 +8,8 @@ namespace Airports.Data.ORM
         public DbSet<Airport> Airports {get; set;}    
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // optionsBuilder.UseSqlServer(@"Server=.\SQLExpress;Database=Airports;Trusted_Connection=True;MultipleActiveResultSets=true");            
-            optionsBuilder.UseSqlServer(@"Server=.\;Database=Airports;Trusted_Connection=True;MultipleActiveResultSets=true");            
+            optionsBuilder.UseSqlServer(@"Server=.\SQLExpress;Database=Airports;Trusted_Connection=True;MultipleActiveResultSets=true");            
+            // optionsBuilder.UseSqlServer(@"Server=.\;Database=Airports;Trusted_Connection=True;MultipleActiveResultSets=true");            
         }
     }
 }

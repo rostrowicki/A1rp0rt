@@ -21,22 +21,6 @@ namespace Airports.Data.DO
         public string Continent { get; set; }
         public string Type { get; set; }
         public string Size { get; set; }
-        public AirportDto ToDto()
-        {
-            return new AirportDto()
-            {
-                AirportId = this.AirportId,
-                Iata = this.Iata,
-                Lon = this.Lon,
-                Lat = this.Lat,
-                Iso = this.Iso,
-                Status = this.Status,
-                Name = this.Name,
-                Continent = this.Continent,
-                Type = this.Type,
-                Size = this.Size,
-            };
-        }
     }
 }
 
